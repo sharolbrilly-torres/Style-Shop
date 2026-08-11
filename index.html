@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Shop | Tienda de Moda</title>
+
+    <link rel="stylesheet" href="css/Styles.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <h1>STYLE SHOP</h1>
+            <p>Moda que va contigo</p>
+        </div>
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#catalogo">Catálogo</a>
+            <a href="#asistente">Asistente IA</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="inicio" class="hero">
+            <div>
+                <h2>Encuentra tu estilo</h2>
+                <p>
+                    Descubre nuestras prendas y recibe recomendaciones
+                    personalizadas con nuestro asistente virtual.
+                </p>
+
+                <a href="#catalogo" class="btn">
+                    Ver catálogo
+                </a>
+            </div>
+        </section>
+
+        <section id="catalogo" class="section">
+            <h2>Nuestro catálogo</h2>
+            <p class="section-description">
+                Conoce algunas de las prendas disponibles en Style Shop.
+            </p>
+
+            <div class="products">
+
+                <article class="product-card">
+                    <h3>Camiseta Basic</h3>
+                    <p>Camiseta versátil para uso diario.</p>
+                    <strong>$35.000</strong>
+                    <span>Tallas: S, M, L, XL</span>
+                </article>
+
+                <article class="product-card">
+                    <h3>Camiseta Urban</h3>
+                    <p>Diseño moderno para un estilo urbano.</p>
+                    <strong>$42.000</strong>
+                    <span>Tallas: S, M, L, XL</span>
+                </article>
+
+                <article class="product-card">
+                    <h3>Camisa Classic</h3>
+                    <p>Una opción elegante y fácil de combinar.</p>
+                    <strong>$58.000</strong>
+                    <span>Tallas: S, M, L, XL</span>
+                </article>
+
+                <article class="product-card">
+                    <h3>Jean Essential</h3>
+                    <p>Jean cómodo para diferentes ocasiones.</p>
+                    <strong>$95.000</strong>
+                    <span>Tallas: 28, 30, 32, 34, 36</span>
+                </article>
+
+                <article class="product-card">
+                    <h3>Pantalón Cargo</h3>
+                    <p>Estilo moderno y práctico.</p>
+                    <strong>$78.000</strong>
+                    <span>Tallas: 28, 30, 32, 34, 36</span>
+                </article>
+
+                <article class="product-card">
+                    <h3>Vestido Luna</h3>
+                    <p>Una prenda moderna para diferentes ocasiones.</p>
+                    <strong>$85.000</strong>
+                    <span>Tallas: S, M, L</span>
+                </article>
+
+            </div>
+        </section>
+
+        <section id="asistente" class="section assistant-section">
+
+            <h2>🤖 Asistente Style Shop</h2>
+
+            <p class="section-description">
+                Pregúntame sobre nuestros productos y te ayudaré a elegir.
+            </p>
+
+            <div class="assistant-box">
+
+                <label for="apiKey">
+                    API Key de Google AI Studio
+                </label>
+
+                <input
+                    type="password"
+                    id="apiKey"
+                    placeholder="Ingresa tu API Key"
+                >
+
+                <label for="inputCliente">
+                    ¿Qué estás buscando?
+                </label>
+
+                <textarea
+                    id="inputCliente"
+                    rows="4"
+                    placeholder="Ejemplo: Quiero una camiseta para hombre de menos de $45.000"
+                ></textarea>
+
+                <button id="btnGenerar">
+                    Consultar asistente
+                </button>
+
+                <div id="resultadoIA" class="resultado">
+                    Aquí aparecerá la recomendación del asistente.
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Style Shop | Proyecto Productivo SENA</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>
