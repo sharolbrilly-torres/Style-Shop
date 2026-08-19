@@ -1,6 +1,5 @@
 const btnGenerar = document.getElementById("btnGenerar");
 const inputCliente = document.getElementById("inputCliente");
-const apiKeyInput = document.getElementById("apiKey");
 const resultadoIA = document.getElementById("resultadoIA");
 
 const catalogo = `
@@ -20,20 +19,16 @@ CATÁLOGO DE STYLE SHOP:
 
 btnGenerar.addEventListener("click", async () => {
 
-    const apiKey = apiKeyInput.value.trim();
     const pregunta = inputCliente.value.trim();
 
-    if (!apiKey) {
-        resultadoIA.textContent = "Por favor, ingresa tu API Key.";
-        return;
-    }
-
     if (!pregunta) {
-        resultadoIA.textContent = "Escribe qué prenda estás buscando.";
+        resultadoIA.textContent =
+            "Escribe qué prenda estás buscando.";
         return;
     }
 
-    resultadoIA.textContent = "Consultando al asistente...";
+    resultadoIA.textContent =
+        "Consultando al asistente...";
 
     const prompt = `
 Eres el asistente virtual de Style Shop.
@@ -58,53 +53,34 @@ ${pregunta}
 
     try {
 
-        const response = await fetch(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-goog-api-key": apiKey
-                },
-
-                body: JSON.stringify({
-                    contents: [
-                        {
-                            parts: [
-                                {
-                                    text: prompt
-                                }
-                            ]
-                        }
-                    ],
-                    generationConfig: {
-                        temperature: 0.7,
-                        topP: 0.9
-                    }
-                })
-            }
-        );
+        const response = await fetch("/api/gemini", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                prompt: prompt
+            })
+        });
 
         const data = await response.json();
 
         if (!response.ok) {
             throw new Error(
-                data.error?.message || "No se pudo conectar con Gemini."
+                data.error ||
+                "No se pudo conectar con Gemini."
             );
         }
 
-        const respuesta =
-            data.candidates?.[0]?.content?.parts?.[0]?.text;
-
         resultadoIA.textContent =
-            respuesta || "No recibimos una respuesta del asistente.";
+            data.respuesta ||
+            "No recibimos una respuesta del asistente.";
 
     } catch (error) {
 
-        console.error(error);
+        console.error("Error:", error);
 
         resultadoIA.textContent =
-            "Ocurrió un error al conectar con Gemini. Verifica tu API Key e inténtalo nuevamente.";
+            "Ocurrió un error al conectar con el asistente.";
     }
 });
