@@ -9,6 +9,25 @@ export default async function handler(req, res) {
 
   try {
 
+    // Obtener la API Key desde las variables de entorno de Vercel
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    // Verificar que Vercel tenga la API Key
+    if (!apiKey) {
+      console.error("GEMINI_API_KEY no está disponible en Vercel");
+
+      return res.status(500).json({
+        error: "GEMINI_API_KEY no está configurada en el entorno"
+      });
+    }
+
+    // Mostrar solamente la longitud de la clave.
+    // Nunca mostramos la clave real.
+    console.log(
+      "GEMINI_API_KEY detectada. Longitud:",
+      apiKey.length
+    );
+
     // Recibir el prompt enviado desde app.js
     const { prompt } = req.body || {};
 
@@ -27,7 +46,7 @@ export default async function handler(req, res) {
 
         headers: {
           "Content-Type": "application/json",
-          "x-goog-api-key": process.env.GEMINI_API_KEY
+          "x-goog-api-key": apiKey
         },
 
         body: JSON.stringify({
@@ -43,6 +62,8 @@ export default async function handler(req, res) {
           ],
 
           generationConfig: {
+            temperature: 0.7,
+            topP: 0.9,
             maxOutputTokens: 800
           }
         })
